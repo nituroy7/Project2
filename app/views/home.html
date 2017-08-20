@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<style>
+/* Full-width input fields */
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+
+.signupbtn {
+    width: 50%;
+    text-align: center;
+}
+
+/* Add padding to container elements */
+
+.container {
+    padding: 16px;
+}
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 80%;
+    /* Full width */
+    height: 80%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+}
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+/* The Close Button (x) */
+
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    color: #000;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+/* Clear floats */
+
+.clearfix .signupbtn: {
+    content: "";
+    clear: both;
+    display: table;
+    text-align: center;
+    margin-left: 40%;
+}
+}
+</style>
+
+<body>
+    <h2>This is a dummy homepage -- for integrating signup, signin and signout functionalities</h2>
+    <button onclick="document.getElementById('signin').style.display='block'" style="width:auto;">Sign In</button>
+    <button onclick="document.getElementById('signup').style.display='block'" style="width:auto;">Sign Up</button>
+    <button onclick="document.getElementById('proRegister').style.display='block'" style="width:auto;">Provider Regiser</button>
+    <div id="signin" class="modal">
+        <span onclick="document.getElementById('signin').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content animate" method="post" action="/signin">
+            <div class="container">
+                <label><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" required>
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+                <input type="checkbox" checked="checked"> Remember me
+                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                <div class="clearfix">
+                    <button type="submit" class="signupbtn">Sign Up</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="signup" class="modal">
+        <span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content animate" method="post" action="/signup">
+            <div class="container">
+                <label for="firstname"><b>Firstname</b></label>
+                <input name="firstname" type="text" />
+                <label for="lastname"><b>Lastname</b></label>
+                <input name="lastname" type="text" />
+                <label><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" required>
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+                <input type="checkbox" checked="checked"> Remember me
+                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                <div class="clearfix">
+                    <button type="submit" class="signupbtn">Sign Up</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="proRegister" class="modal">
+        <span onclick="document.getElementById('proRegister').style.display='none'">×</span>
+        <form class="modal-content animate" method="post" action="/api/provider/create">
+            <div class="container">
+                <label><b>Service</b></label>                
+                <SELECT name="serviceid" required>
+                    <option value="1">Florist</option>                    
+                    <option value="2">DJ</option>                    
+                    <option value="3">Caterer</option>                    
+                    <option value="6">Dresser</option>                    
+                    <option value="7">Venue Provider</option>  
+                </SELECT>
+                <label><b>Company</b></label>
+                <input type="text" name="company">
+                <label for="firstname"><b>Firstname</b></label>
+                <input name="firstname" type="text" />
+                <label for="lastname"><b>Lastname</b></label>
+                <input name="lastname" type="text" />
+                <label><b>Email</b></label>
+                <input type="text" name="email" required>
+                <label><b>Phone</b></label>
+                <input type="text" name="phone" required>
+                <label><b>Address1</b></label>
+                <input type="text" name="Address1" required>
+                <label><b>Zipcode</b></label>
+                <input type="text" name="zipCode" required>
+                <div class="clearfix">
+                    <button type="submit" class="signupbtn">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+    // Get the modal
+    var signInModal = document.getElementById('signin');
+    var signUpModal = document.getElementById('signup');
+    var providerRegModal = document.getElementById('proRegister');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == signInModal) {
+            signInModal.style.display = "none";
+        } else if (event.target == signUpModal) {
+            signUpModal.style.display = "none";
+        } else if (event.target == proRegister) {
+            proRegister.style.display = "none";
+        }
+    }
+    </script>
+</body>
+
+</html>
